@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Главная{% endblock title %}
+
+{% block content %}
+    <br/>
+    <div class="jumbotron">
+        <h1 class="display-4">Здравствуйте</h1>
+        {#        <img class="img-thumbnail" src="{% static 'assets/img/profile.png' %}" alt="Card image cap">#}
+        <p class="lead">Добро пожаловать на блог Хусрава Махмаджанова.</p>
+        <hr class="my-4">
+        <p>Здесь публикуются статьи о программах, ЯП и программистах.</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="{% url 'articles' %}" role="button">Посмотреть посты</a>
+        </p>
+    </div>
+{% endblock content %}

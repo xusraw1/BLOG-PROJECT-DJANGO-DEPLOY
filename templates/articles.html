@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Посты{% endblock title %}
+
+{% block content %}
+    {% if not articles %}
+        <div class="alert alert-primary" role="alert" style="text-align: center">
+            <h4><i><b>Список пуст, добавьте что нибудь</i></h4> <a href="{% url 'article_create' %}" class="btn btn-warning"
+                                                                    style="color: #000000">ДОБАВИТЬ</a></b>
+        </div>
+    {% else %}
+        {% for article in articles %}
+            <div class="card" style="width: 50rem;">
+            <div class="card-header">
+            <span class="font-weight-bold"><a
+                    href="{% url 'article' article.pk %}"><h2>{{ article.title }}</h2></a></span>
+            </div>
+            {% if article.photo %}
+                <img class="card-img-top" src="{{ article.photo.url }}" alt="{{ article.title }}">
+            {% endif %}
+            <div class="card-body">
+                {{ article.summary|truncatewords:20 }} <a href="{% url 'article' article.pk %}">детально</a>
+            </div>
+            <div class="card-footer text-left text-muted">
+                <span class="text-muted">автор: {{ article.author | title }} &middot; {{ article.date }}</span>
+            </div>
+            <br/>
+        {% endfor %}
+    {% endif %}
+</div>
+{% endblock content %}

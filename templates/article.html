@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %} Пост {% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+                {% if object.photo %}
+                    <img class="card-img-top" src="{{ object.photo.url }}" alt="{{ object.title }}">
+                {% endif %}
+                <h1 class="card-title">{{ object.title }}</h1>
+                <h6 class="card-subtitle mb-2 text-muted">Автор: {{ object.author }} | {{ object.date }}</h6>
+                <p class="card-text">{{ object.text | safe }}</p>
+                <a href="{% url 'article_edit' article.pk %}">Обновить</a> |
+                <a href="{% url 'article_delete' article.pk %}">Удалить</a> |
+                <a href="{% url 'articles' %}">Все посты</a>
+            </div>
+        </div>
+        <br>
+        <div class="card">
+            <div class="card-header">Коментарии</div>
+            {% for commen in article.comment.all %}
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                        <p>{{ commen }}</p>
+                        <footer class="blockquote-footer">{{ commen.author }}</footer>
+                    </blockquote>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
